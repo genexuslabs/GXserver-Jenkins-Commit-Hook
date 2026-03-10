@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using GeneXus.Server.ExternalTool;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -66,14 +65,14 @@ namespace GeneXus.Server.ExternalTool.Jenkins
                             if (crumbSuccess)
                             {
 
-                               // bool buildSuccess = true;
+                                // bool buildSuccess = true;
 
                                 res = new Result(200, jServer.Host + " - " + jProject + " - ok", jServer.Host + " - " + jProject + " - ok");
 
                                 string GX_Server_User_Attribute = "?GX_Server_User=";
-                                
-                                string GX_Server_User_Value = InfoCommit.CommitInformation.GxUser; 
-                                                                                 
+
+                                string GX_Server_User_Value = InfoCommit.CommitInformation.GxUser;
+
                                 string triggerbuild = jServer.Host + "/job/" + jProject + "/buildWithParameters" + GX_Server_User_Attribute + GX_Server_User_Value;
 
                                 HttpWebRequest requestBuild = (HttpWebRequest)WebRequest.Create(triggerbuild);
@@ -107,8 +106,7 @@ namespace GeneXus.Server.ExternalTool.Jenkins
                                 res = resCrumb;
                             }
                             results.Add(res);
-                           }
-
+                        }
                     }
                 }
                 return results;
@@ -311,12 +309,12 @@ namespace GeneXus.Server.ExternalTool.Jenkins
                 //403
                 case HttpStatusCode.Forbidden:
                     descResult = "The server refuses to fulfill the request.";
-                    shortDescResult = resp.StatusDescription ;
+                    shortDescResult = resp.StatusDescription;
                     break;
                 //404
                 case HttpStatusCode.NotFound:
                     descResult = "The requested resource does not exist on the server";
-                    shortDescResult = resp.StatusDescription ;
+                    shortDescResult = resp.StatusDescription;
                     break;
                 //405
                 case HttpStatusCode.MethodNotAllowed:
@@ -392,7 +390,7 @@ namespace GeneXus.Server.ExternalTool.Jenkins
                 //500
                 case HttpStatusCode.InternalServerError:
                     descResult = "A generic error has occurred on the server.";
-                    shortDescResult = resp.StatusDescription ;
+                    shortDescResult = resp.StatusDescription;
                     break;
                 //501
                 case HttpStatusCode.NotImplemented:
@@ -432,5 +430,4 @@ namespace GeneXus.Server.ExternalTool.Jenkins
             return ret;
         }
     }
-
 }

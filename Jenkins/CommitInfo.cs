@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GeneXus.Server.ExternalTool;
 using System.Text.RegularExpressions;
 
 namespace GeneXus.Server.ExternalTool.Jenkins
 {
-    public class InfoCommitData 
+    public class InfoCommitData
     {
         public InfoCommitData(CommitData commit)
         {
@@ -23,10 +18,10 @@ namespace GeneXus.Server.ExternalTool.Jenkins
 
         public class CommitInfo
         {
-           
+
             public string build { get; set; }
             public string GxUser { get; set; }
-         
+
             public CommitInfo(string b)
             : this(b, string.Empty)
             {
@@ -37,27 +32,27 @@ namespace GeneXus.Server.ExternalTool.Jenkins
             public CommitInfo(string b, string u)
             {
                 build = b;
-                GxUser = u;  
+                GxUser = u;
             }
 
-        } 
-    private void ParseComments(CommitData commit)
-    {
-        try
+        }
+        private void ParseComments(CommitData commit)
         {
+            try
+            {
                 CommitInformation = GetCommitInfo(commit);
+            }
+            catch
+            {
+                throw new ArgumentException("Error parsing the information to be sent.");
+            }
+
         }
-        catch
+
+        private CommitInfo GetCommitInfo(CommitData commit)
         {
-            throw new ArgumentException("Error parsing the information to be sent.");
-        }
-
-    }
-
-    private CommitInfo GetCommitInfo(CommitData commit)
-    {
-        try
-         {
+            try
+            {
 
                 CommitInfo CommitInformation = new CommitInfo();
                 Regex rx = new Regex(@"(?i)(#build:(?<build>[yes|y]))");
@@ -76,15 +71,15 @@ namespace GeneXus.Server.ExternalTool.Jenkins
                     GroupCollection groups = match.Groups;
                     if (groups["gxuser"].Value != string.Empty)
                         CommitInformation.GxUser = groups["gxuser"].Value;
-                    
+
                 }
-                
-              return CommitInformation;
-        }
-        catch
-        {
-            throw new ArgumentException("Parsing of the comment has failed.");
+
+                return CommitInformation;
+            }
+            catch
+            {
+                throw new ArgumentException("Parsing of the comment has failed.");
+            }
         }
     }
-}
 }
