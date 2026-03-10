@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Reference Include="GeneXus.Server.ExternalTool">
-      <HintPath>$(GX_SDK_DIR)\BinServer\GeneXus.Server.ExternalTool.dll</HintPath>
+      <HintPath>$(GX_SERVER_DIR)\BinGenexus\GeneXus.Server.ExternalTool.dll</HintPath>
     </Reference>
   </ItemGroup>
 
