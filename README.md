@@ -3,9 +3,9 @@ GXServer-Jenkins integration using [Event Dispatcher extension](https://wiki.gen
 
 ## This repository contains:
 
-An example of the implementation of the intermediate software for the communication between GeneXus Server and Jenkins. 
+An example of the implementation of the intermediate hook for the communication between GeneXus Server and Jenkins. 
 
-The Event Dispatcher extension (installed on GeneXus Server) is subscribed to the commits of the KB an calls this intermediate software.
+The Event Dispatcher extension (installed on GeneXus Server) is subscribed to the commits of the KB and calls this intermediate hook.
 
 ## Repository structure:
 
@@ -14,15 +14,14 @@ The Event Dispatcher extension (installed on GeneXus Server) is subscribed to th
 ## Requirements
 
  - .NET Framework 4.7.1 or upper
- -  GeneXus Platform SDK
  
   At runtime, the Event Dispatcher extension has to be installed at GeneXus Server.
 
 ## How to build the solution
 
- - Defined the $(GX_SDK_DIR) environment variable to the Platform SDK installation.
- - Check the .csproj file where it detemines where the compiled dll will be copied (define the $(GX_SERVER_DIR) environment variable to the <GeneXus Server installation>\VDIR).
-   In order to debug or run this solution the compiled dll has to be under the $(GX_SERVER_DIR)\BinGenexus folder.
+ - Defined the `GX_SERVER_DIR` environment variable to a GeneXus Server VDir location.
+ - Check the .csproj file where it determines where the compiled dll will be copied.
+   In order to debug or run this solution the compiled dll has to be under the `$(GX_SERVER_DIR)\BinGenexus` folder.
 
 # License
 
